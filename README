@@ -1,0 +1,33 @@
+PiBowl is an automated SVoIP Asterisk installation / configuration script.
+
+http://www.chokepoint.net/2013/08/create-your-own-fish-bowl-nsa-approved.html
+
+It assumes you are using a Debian based system for fetching dependencies.
+This was also specifically designed for Raspberry Pi, as the configuration
+has low memory compile options enabled by default.
+
+If you require additional modules, you can uncomment the make menuconfig
+line in pibowl.sh.
+
+The script will guide you through the entire process, and comes with 
+a preconfigured setup. Change the following variables in pibowl.sh in
+order to match them to your current VPN setup.
+
+AST_IP=192.168.77.1 # Should be the address Asterisk will bind to.
+AST_NAME='PiBowl_Communications' # Organization name used in Asterisk Certificates
+ALLOW_CONTACT=192.168.77.0\\/255.255.255.0 # Change me based on your VPN config to only allow local calls
+EXTEN=100 	# First client generated will be extension 100
+
+Once you're happy with the settings simply 
+
+$ sudo ./pibowl.sh
+
+You will be prompted periodically for input, mainly when creating a password
+for your certificate authority, and while creating certificates for your clients.
+You can add as many clients as you want, and it will setup their SIP login
+as well as dialing extension for you. You can obviously go back and make
+changes / add users as required by using the Asterisk config files.
+
+
+In the future, we will be adding a client directory for automatically 
+configuring a SVoIP client for Raspberry Pi.
